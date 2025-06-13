@@ -1,16 +1,22 @@
+'use client'
 import { motion } from "motion/react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa6";
+import { useState } from "react";
+
 
 export default function InputBox() {
+
+    const [searchQuery, setSearchQuery] = useState("");
+
     return (
         <motion.div
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={{ opacity: 1, filter: "blur(0)" }}
             transition={{ duration: 1 }}
-            className="relative w-2/4 mt-10"
-        >
+            className="relative w-3/5 mt-10">
+
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
                 <div
                     className="absolute inset-[-4px] rounded-2xl animate-spin-slow"
@@ -27,11 +33,13 @@ export default function InputBox() {
             {/* Main content */}
             <div
                 style={{ fontFamily: "Geist", resize: "none" }}
-                className="relative shadow-xl shadow-white/5 bg-white/5 rounded-2xl overflow-hidden p-4 border border-white/20 outline-none placeholder:text-white/50 text-white/90 flex flex-col gap-y-2"
-            >
+                className="relative shadow-xl shadow-white/5 bg-white/5 rounded-2xl overflow-hidden p-4 border border-white/20 outline-none placeholder:text-white/50 text-white/90 flex flex-col gap-y-5">
                 <textarea
                     placeholder="Ask me anything..."
-                    className="w-full min-h-24 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content]"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full min-h-16 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
 
                 <div className="flex flex-row justify-between items-center w-full">
@@ -52,8 +60,8 @@ export default function InputBox() {
 
                     </div>
 
-                    <Button className="bg-white/5 shadow-sm border border-white/60 text-white/90 h-8 rounded-sm px-3 flex flex-row justify-center items-center gap-2">
-                        <span className="text-xs text-white/70">⌘ + Enter</span>
+                    <Button className={`bg-white/5 shadow-sm border ${searchQuery.length > 0 ? 'border-white text-white' : 'border-white/60 text-white/60'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm px-3 flex flex-row justify-center items-center gap-2`}>
+                        <span className="text-xs">⌘ + Enter</span>
                         <FaArrowRight style={{ width: '12px', height: '12px' }} />
                     </Button>
 
