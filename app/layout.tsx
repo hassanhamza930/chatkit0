@@ -3,7 +3,7 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "ChatKit0-t3.chat clone",
+  title: "ChatKit0-t3.chat clonethon",
   description: "An Abstraction Experiment to combine multi-provider LLM chat based application.",
 }
 
