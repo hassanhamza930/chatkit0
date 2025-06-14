@@ -3,12 +3,25 @@ import { motion } from "motion/react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa6";
-import { useState } from "react";
+import useInputBoxLogic from "./logic/useInputBoxLogic";
 
 
 export default function InputBox() {
 
-    const [searchQuery, setSearchQuery] = useState("");
+    const { searchQuery, setSearchQuery } = useInputBoxLogic();
+    const availableModels=[
+        {
+            name: "Gemini Flash 2.0 Lite",
+            value: "google/gemini-2.0-flash-lite-001",
+            byok:false
+        },
+        {
+            name: "o4 Mini",
+            value: "openai/o4-mini",
+            byok:true
+        },    
+    ];
+
 
     return (
         <motion.div
@@ -46,15 +59,14 @@ export default function InputBox() {
 
                     <div className="flex-row flex justify-start items-center">
 
-                        <Select defaultValue="gpt-4">
+                        <Select defaultValue={availableModels[0].value}>
                             <SelectTrigger className="bg-transparent text-white/90 border border-white/60 rounded-lg px-3 text-xs outline-none w-fit shadow-sm shadow-white/20">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-zinc-950 border-white/20 text-xs ">
-                                <SelectItem value="gpt-4" className="text-white/90 focus:bg-white/10">GPT-4</SelectItem>
-                                <SelectItem value="gpt-3.5" className="text-white/90 focus:bg-white/10">GPT-3.5</SelectItem>
-                                <SelectItem value="gemini-pro" className="text-white/90 focus:bg-white/10">Gemini Pro</SelectItem>
-                                <SelectItem value="claude-3" className="text-white/90 focus:bg-white/10">Claude 3</SelectItem>
+                                {availableModels.map((model) => (
+                                    <SelectItem key={model.value} value={model.value} className="text-white/90 focus:bg-white/10">{model.name}</SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
 
@@ -67,6 +79,7 @@ export default function InputBox() {
 
                 </div>
             </div>
+
         </motion.div>
     )
 }

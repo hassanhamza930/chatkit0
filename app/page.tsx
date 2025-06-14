@@ -1,7 +1,7 @@
 'use client';
 
 import BlurRevealText from "@/components/BlurText";
-import InputBox from "@/components/InputBox";
+import InputBox from "@/components/InputBox/InputBox";
 
 
 
