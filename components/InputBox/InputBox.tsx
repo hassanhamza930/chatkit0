@@ -6,11 +6,21 @@ import { FaArrowRight } from "react-icons/fa6";
 import useInputBoxLogic from "./logic/useInputBoxLogic";
 import { Command, Plus, CornerDownLeft } from "lucide-react";
 
+interface InputBoxProps {
+    onSubmit: () => void;
+}
 
-export default function InputBox() {
+export default function InputBox({ onSubmit }: InputBoxProps) {
 
     const { searchQuery, setSearchQuery, selectedModel, setSelectedModel } = useInputBoxLogic();
 
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            onSubmit();
+        }
+    };
 
     const availableModels = [
         {
@@ -54,6 +64,7 @@ export default function InputBox() {
                     placeholder="Ask me anything..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="w-full min-h-12 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
@@ -76,6 +87,7 @@ export default function InputBox() {
                     </div>
 
                     <Button
+                        onClick={onSubmit}
                         disabled={searchQuery.length === 0}
                         className={`bg-white/5 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1`}>
 

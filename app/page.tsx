@@ -2,10 +2,14 @@
 
 import BlurRevealText from "@/components/BlurText";
 import InputBox from "@/components/InputBox/InputBox";
+import { useRouter } from "next/navigation";
 
 
 
 export default function Home() {
+
+  const router = useRouter();
+
   return (
     <div className="w-full flex flex-col justify-center items-center px-[5%] md:px-[10%] h-full">
 
@@ -19,7 +23,7 @@ export default function Home() {
         className="mt-3 text-sm md:text-md font-normal text-center text-white w-full max-w-[450px] px-4 mb-10" text="An Abstraction Layer for GPT, Gemini, Claude and more." />
 
 
-      <InputBox />
+      <InputBox onSubmit={() => { router.push("/chat") }} />
 
     </div >
   )
