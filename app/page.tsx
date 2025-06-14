@@ -2,6 +2,7 @@
 
 import BlurRevealText from "@/components/BlurText";
 import InputBox from "@/components/InputBox/InputBox";
+import { useInputBoxStore } from "@/components/InputBox/store/inputboxstore";
 import { useRouter } from "next/navigation";
 
 
@@ -9,6 +10,8 @@ import { useRouter } from "next/navigation";
 export default function Home() {
 
   const router = useRouter();
+  const { openrouterKey, selectedModel } = useInputBoxStore();
+
 
   return (
     <div className="w-full flex flex-col justify-center items-center px-[5%] md:px-[10%] h-full">
@@ -22,8 +25,15 @@ export default function Home() {
         style={{ fontFamily: "Geist" }}
         className="mt-3 text-sm md:text-md font-normal text-center text-white w-full max-w-[450px] px-4 mb-10" text="An Abstraction Layer for GPT, Gemini, Claude and more." />
 
+      <InputBox onSubmit={() => {
 
-      <InputBox onSubmit={() => { router.push("/chat") }} />
+        if (selectedModel?.byok == true && openrouterKey == "") {
+          alert("Please set your OpenRouter key in the input box");
+        } else {
+          router.push("/chat");
+        }
+
+      }} />
 
     </div >
   )
