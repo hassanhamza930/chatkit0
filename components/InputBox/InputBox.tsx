@@ -72,10 +72,12 @@ export default function InputBox() {
 
                     </div>
 
-                    <Button className={`bg-white/5 shadow-sm border ${searchQuery.length > 0 ? 'border-white text-white' : 'border-white/60 text-white/60'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm px-3 flex flex-row justify-center items-center gap-2`}>
-                        <span className="text-xs">⌘ + Enter</span>
+                    <Button 
+                    disabled={searchQuery.length === 0}
+                    className={`bg-white/5 shadow-sm border ${searchQuery.length > 0 ? 'border-white text-white' : 'border-white/60 text-white/60'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm px-3 flex flex-row justify-center items-center gap-2`}>
                         <FaArrowRight style={{ width: '12px', height: '12px' }} />
                     </Button>
+
 
                 </div>
             </div>
