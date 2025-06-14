@@ -16,7 +16,7 @@ export default function Home() {
 
       <BlurRevealText
         style={{ fontFamily: "Geist" }}
-        className="mt-3 text-sm md:text-md font-normal text-center text-white w-full max-w-[450px] px-4" text="An Abstraction Layer for GPT, Gemini, Claude and more." />
+        className="mt-3 text-sm md:text-md font-normal text-center text-white w-full max-w-[450px] px-4 mb-10" text="An Abstraction Layer for GPT, Gemini, Claude and more." />
 
 
       <InputBox />

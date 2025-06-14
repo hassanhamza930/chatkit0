@@ -4,22 +4,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa6";
 import useInputBoxLogic from "./logic/useInputBoxLogic";
+import { Command, Plus, CornerDownLeft } from "lucide-react";
 
 
 export default function InputBox() {
 
-    const { searchQuery, setSearchQuery } = useInputBoxLogic();
-    const availableModels=[
+    const { searchQuery, setSearchQuery, selectedModel, setSelectedModel } = useInputBoxLogic();
+
+
+    const availableModels = [
         {
             name: "Gemini Flash 2.0 Lite",
             value: "google/gemini-2.0-flash-lite-001",
-            byok:false
+            byok: false
         },
         {
             name: "o4 Mini",
             value: "openai/o4-mini",
-            byok:true
-        },    
+            byok: true
+        },
     ];
 
 
@@ -28,7 +31,7 @@ export default function InputBox() {
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={{ opacity: 1, filter: "blur(0)" }}
             transition={{ duration: 1 }}
-            className="relative w-3/5 mt-10">
+            className="relative w-3/5 2xl:w-[800px]">
 
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
                 <div
@@ -51,7 +54,7 @@ export default function InputBox() {
                     placeholder="Ask me anything..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full min-h-16 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide"
+                    className="w-full min-h-12 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
 
@@ -59,23 +62,34 @@ export default function InputBox() {
 
                     <div className="flex-row flex justify-start items-center">
 
-                        <Select defaultValue={availableModels[0].value}>
-                            <SelectTrigger className="bg-transparent text-white/90 border border-white/60 rounded-lg px-3 text-xs outline-none w-fit shadow-sm shadow-white/20">
+                        <Select value={selectedModel} onValueChange={setSelectedModel}>
+                            <SelectTrigger className="bg-transparent text-white/90 border border-white/60 rounded-lg px-3 text-xs outline-none w-fit shadow-sm font-medium shadow-white/20">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-zinc-950 border-white/20 text-xs ">
                                 {availableModels.map((model) => (
-                                    <SelectItem key={model.value} value={model.value} className="text-white/90 focus:bg-white/10">{model.name}</SelectItem>
+                                    <SelectItem key={model.value} value={model.value} className="text-white/90 focus:bg-white/10 font-medium">{model.name}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
 
                     </div>
 
-                    <Button 
-                    disabled={searchQuery.length === 0}
-                    className={`bg-white/5 shadow-sm border ${searchQuery.length > 0 ? 'border-white text-white' : 'border-white/60 text-white/60'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm px-3 flex flex-row justify-center items-center gap-2`}>
-                        <FaArrowRight style={{ width: '12px', height: '12px' }} />
+                    <Button
+                        disabled={searchQuery.length === 0}
+                        className={`bg-white/5 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1`}>
+
+                        {
+                            searchQuery.length > 0 ?
+                                <div className="flex flex-row justify-center items-center gap-1">
+                                    <Command style={{ width: '12px', height: '12px' }} />
+                                    <Plus style={{ width: '12px', height: '12px' }} />
+                                    <CornerDownLeft style={{ width: '12px', height: '12px' }} />
+                                </div>
+                                :
+                                <FaArrowRight style={{ width: '10px', height: '12px' }} />
+                        }
+
                     </Button>
 
 

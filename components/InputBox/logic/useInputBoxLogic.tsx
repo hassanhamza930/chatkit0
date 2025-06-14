@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useInputBoxStore } from "../store/inputboxstore";
 
 export default function useInputBoxLogic() {
-    const { searchQuery, setSearchQuery } = useInputBoxStore();
+    const { searchQuery, setSearchQuery, selectedModel, setSelectedModel, openrouterKey, setOpenrouterKey } = useInputBoxStore();
 
-    return { searchQuery, setSearchQuery };
+    useEffect(() => {
+        setOpenrouterKey(localStorage.getItem("openrouterKey") || "");
+    }, []);
+
+    return { searchQuery, setSearchQuery, selectedModel, setSelectedModel };
 }
