@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
 
   const router = useRouter();
-  const { openrouterKey, selectedModel } = useInputBoxStore();
+  const { openrouterKey, selectedModel, setOpenrouterKeyModalOpen } = useInputBoxStore();
 
 
   return (
@@ -28,7 +28,7 @@ export default function Home() {
       <InputBox onSubmit={() => {
 
         if (selectedModel?.byok == true && openrouterKey == "") {
-          alert("Please set your OpenRouter key in the input box");
+          setOpenrouterKeyModalOpen(true);
         } else {
           router.push("/chat");
         }
