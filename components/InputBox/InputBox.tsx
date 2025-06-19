@@ -60,7 +60,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="w-full min-h-12 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide font-medium"
+                    className="w-full min-h-12 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide font-normal tracking-normal break-all"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
 

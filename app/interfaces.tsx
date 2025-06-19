@@ -6,7 +6,7 @@ export interface Model {
   thinking?: boolean;
 }
 
-export interface MessageProps {
+export interface Message {
   id: string;
   content: string;
   sender: 'user' | 'assistant';
