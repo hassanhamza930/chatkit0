@@ -1,5 +1,6 @@
 import { availableModels } from '@/app/const';
 import { create } from 'zustand'
+import { Model } from '@/app/interfaces';
 
 interface InputBoxState {
   searchQuery: string

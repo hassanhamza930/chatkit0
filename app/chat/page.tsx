@@ -2,6 +2,8 @@
 
 import InputBox from "@/components/InputBox/InputBox";
 import { useRouter } from "next/navigation";
+import { Sidebar } from "./components/Sidebar";
+import { MessagesArea } from "./components/MessagesArea";
 
 export default function Chat() {
 
@@ -10,13 +12,11 @@ export default function Chat() {
     return (
         <div className="w-full flex flex-row justify-center items-center h-full">
 
-            <div className="h-full w-72 bg-white/5 flex flex-none">
-
-            </div>
+            <Sidebar />
 
             <div className="h-full w-full flex flex-col justify-center items-center">
 
-                <div className="h-full w-full flex flex-col justify-center items-center"></div>
+                <MessagesArea />
 
                 <div className="h-auto w-full py-10 flex justify-center items-center">
                     <InputBox onSubmit={() => {}} />
