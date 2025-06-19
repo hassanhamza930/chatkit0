@@ -76,7 +76,7 @@ export default function OpenRouterKeyModal() {
                     </div>
 
                     <p className="text-white/60 text-sm mb-6 leading-relaxed" style={{ fontFamily: "Geist" }}>
-                        {openrouterKey 
+                        {openrouterKey
                             ? 'Update your OpenRouter API key or remove it to use free models only.'
                             : 'Enter your OpenRouter API key to access premium models. Your key is stored locally and never shared.'
                         }
@@ -94,6 +94,15 @@ export default function OpenRouterKeyModal() {
                                     </p>
                                 </div>
                                 
+                                {openrouterKey && (
+                                    <div className="mt-6 p-4 bg-white/5 border border-white/20 rounded-xl">
+                                        <p className="text-white/70 text-sm flex items-center" style={{ fontFamily: "Geist" }}>
+                                            <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse block" />
+                                            API key is currently active
+                                        </p>
+                                    </div>
+                                )}
+
                                 <button
                                     onClick={handleRemoveKey}
                                     className="w-full h-10 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-300 transition-all duration-300 hover:scale-[1.02] text-sm font-medium flex items-center justify-center gap-2"
@@ -121,8 +130,8 @@ export default function OpenRouterKeyModal() {
                                         onClick={handleSaveKey}
                                         disabled={!tempKey.trim()}
                                         className={`flex-1 h-10 rounded-lg border transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium ${tempKey.trim()
-                                                ? 'bg-white/10 border-white/30 text-white/90 hover:bg-white/20 hover:border-white/40 hover:scale-[1.02] shadow-lg shadow-white/5'
-                                                : 'bg-white/5 border-white/10 text-white/40 cursor-not-allowed'
+                                            ? 'bg-white/10 border-white/30 text-white/90 hover:bg-white/20 hover:border-white/40 hover:scale-[1.02] shadow-lg shadow-white/5'
+                                            : 'bg-white/5 border-white/10 text-white/40 cursor-not-allowed'
                                             }`}
                                         style={{ fontFamily: "Geist" }}
                                     >
@@ -141,14 +150,7 @@ export default function OpenRouterKeyModal() {
                         )}
                     </div>
 
-                    {openrouterKey && (
-                        <div className="mt-6 p-4 bg-white/5 border border-white/20 rounded-xl">
-                            <p className="text-white/70 text-sm flex items-center" style={{ fontFamily: "Geist" }}>
-                                <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse block" />
-                                API key is currently active
-                            </p>
-                        </div>
-                    )}
+
                 </div>
             </div>
         </div>

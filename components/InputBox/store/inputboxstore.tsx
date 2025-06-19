@@ -1,14 +1,6 @@
 import { availableModels } from '@/app/const';
 import { create } from 'zustand'
 
-interface Model {
-  name: string;
-  value: string;
-  logo: string;
-  byok: boolean;
-  thinking?: boolean;
-}
-
 interface InputBoxState {
   searchQuery: string
   selectedModel: Model | null
