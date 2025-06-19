@@ -4,7 +4,7 @@ import Header from "@/components/Header/Header";
 
 
 export const metadata: Metadata = {
-  title: "ChatKit0-t3.chat clonethon",
+  title: "ChatKit0",
   description: "An Abstraction Experiment to combine multi-provider LLM chat based application.",
 }
 

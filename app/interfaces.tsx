@@ -13,3 +13,10 @@ export interface Message {
   timestamp: Date;
   selectedModel: Model;
 }
+
+export interface Chat{
+  id: string;
+  name: string;
+  messages: Message[];
+  timeUpdated: Date;
+}

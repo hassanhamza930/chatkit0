@@ -1,11 +1,12 @@
 import type { Message } from '@/app/interfaces';
 import { cn } from '@/lib/utils';
 import { Brain } from 'lucide-react';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 export function Message({ id, content, sender, timestamp, selectedModel }: Message) {
     return (
         <div className={`w-full`}>
-            <div className={cn("flex flex-col gap-2 p-4 rounded-lg w-full  text-white", sender === "user" ? "bg-transparent" : "bg-white/5")}>
+            <div className={cn("flex flex-col p-5 rounded-lg w-full text-white", sender === "user" ? "bg-transparent" : "bg-white/5")}>
 
                 <div className="flex flex-row justify-start items-center">
                     {/* <span style={{ fontFamily: "Special Gothic Expanded One" }} className="font-semibold text-sm opacity-80">{sender === 'user' ? 'You' : 'Assistant'}</span> */}
@@ -14,17 +15,15 @@ export function Message({ id, content, sender, timestamp, selectedModel }: Messa
                     </span>
                 </div>
 
-                <p className="text-sm opacity-90 break-all">
-                    {
-                        content
-                    }
-                </p>
+                <div className="text-base leading-relaxed opacity-90 break-words">
+                    <MarkdownRenderer content={content} className="prose prose-invert max-w-none prose-p:my-2 prose-headings:my-4 prose-ul:my-2 prose-ol:my-2 prose-li:my-1" />
+                </div>
 
-                <div className="flex justify-end opacity-60">
+                <div className="flex justify-end opacity-80">
                     {
                         sender != "user" &&
-                        <span className="text-[11px] px-3 py-1 rounded-full backdrop-blur-xl border border-white/20 flex flex-row justify-center items-center gap-x-1">
-                            <img src={selectedModel.logo} className="w-3 h-3 invert" />
+                        <span className="text-xs tracking-wide font-light px-3 py-1 rounded-full backdrop-blur-xl border border-white/40 flex flex-row justify-center items-center gap-x-1">
+                            <img src={selectedModel.logo} className="w-4 h-4 invert" />
                             {selectedModel.name}
                         </span>
                     }
