@@ -36,7 +36,7 @@ export default function Chat() {
 
             <Sidebar />
 
-            <div className="h-full w-full flex flex-col justify-center items-center">
+            <div className="h-full w-full px-[10%] flex flex-col justify-center items-center">
 
                 <MessagesArea />
 

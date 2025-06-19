@@ -36,7 +36,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={{ opacity: 1, filter: "blur(0)" }}
             transition={{ duration: 1 }}
-            className="relative w-3/5 2xl:w-[800px]">
+            className="relative w-full">
 
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
                 <div
@@ -60,7 +60,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="w-full min-h-12 max-h-64 bg-transparent text-md outline-none resize-none [field-sizing:content] scrollbar-hide font-normal tracking-normal break-all"
+                    className="w-full min-h-12 max-h-64 bg-transparent text-sm outline-none resize-none [field-sizing:content] scrollbar-hide font-normal tracking-normal break-all"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
 
