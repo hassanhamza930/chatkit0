@@ -6,9 +6,6 @@ import type { Message as MessageType } from "@/app/interfaces";
 const hideScrollbar = {
   scrollbarWidth: 'none', // Firefox
   msOverflowStyle: 'none', // IE and Edge
-  '&::-webkit-scrollbar': {
-    display: 'none', // Chrome, Safari, and Opera
-  },
 } as const;
 
 export function MessagesArea() {

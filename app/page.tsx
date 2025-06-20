@@ -14,7 +14,7 @@ export default function Home() {
 
 
   return (
-    <div className="w-full flex flex-col justify-center items-center px-[5%] md:px-[10%] h-full">
+    <div className="w-full flex flex-col justify-center items-center px-[5%] md:px-[25%] h-full">
 
 
       <BlurRevealText
