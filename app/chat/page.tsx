@@ -7,6 +7,7 @@ import { MessagesArea } from "./components/MessagesArea";
 import { useMessages } from "./logic/useMessages";
 import { Model } from "../interfaces";
 import { useInputBoxStore } from "@/components/InputBox/store/inputboxstore";
+import Header from "@/components/Header/Header";
 
 export default function Chat() {
     const router = useRouter();
@@ -16,7 +17,7 @@ export default function Chat() {
 
     const handleSubmit = () => {
         if (!searchQuery) return;
-        
+
         addMessage({
             content: searchQuery,
             sender: 'user',
@@ -36,10 +37,9 @@ export default function Chat() {
 
             <Sidebar />
 
-            <div className="h-full w-full px-[10%] flex flex-col justify-center items-center bg-white/5">
-
+            <div className="relative z-0 h-full w-full px-[10%] flex flex-col justify-center items-center bg-white/5">
+                <Header />
                 <MessagesArea />
-
                 <div className="h-auto w-full py-10 flex justify-center items-center">
                     <InputBox onSubmit={handleSubmit} />
                 </div>

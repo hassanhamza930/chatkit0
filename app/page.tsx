@@ -18,7 +18,7 @@ export default function Home() {
 
 
       <BlurRevealText
-        style={{ fontFamily: "Geist Mono", fontWeight: "700" }}
+        style={{ fontFamily: "Geist Mono", fontWeight: "600" }}
         className="w-full max-w-[550px] text-4xl md:text-5xl text-center flex flex-wrap gap-x-2 justify-center tracking-tighter items-center text-shadow-2xs text-shadow-blue-600" text="ChatKit0" />
 
       <BlurRevealText

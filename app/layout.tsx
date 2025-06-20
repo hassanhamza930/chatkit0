@@ -19,7 +19,6 @@ export default function RootLayout({
         style={{ fontFamily: "Geist" }}
         className={`subpixel-antialiased bg-zinc-950 h-screen w-full`}
       >
-        <Header />
         {children}
       </body>
     </html>

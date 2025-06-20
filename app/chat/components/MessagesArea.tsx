@@ -13,7 +13,7 @@ export function MessagesArea() {
 
     return (
         <div 
-            className="h-full flex flex-col justify-start items-center py-10 gap-y-4 w-full overflow-y-auto pr-3" 
+            className="h-full flex flex-col justify-start items-center py-10 pt-24 gap-y-4 w-full overflow-y-auto pr-3" 
             style={hideScrollbar as React.CSSProperties}
         >
             {messages.map((message) => (

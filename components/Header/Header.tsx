@@ -12,7 +12,12 @@ export default function Header() {
 
     return (
         <>
-            <header className="absolute top-0 right-0 z-50 p-6">
+            <header style={{fontFamily:""}} className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-6 py-5 backdrop-blur-[10px] bg-gradient-to-b from-black to-black/90 [mask-image:linear-gradient(to_bottom,white_20%,transparent_100%)]">
+                
+                <div className="flex flex-row justify-start items-center">
+                    <h1 className="text-xl font-semibold text-center text-white">ChatKit is really Good</h1>
+                </div>
+                
                 <div className="flex items-center gap-4">
                     {/* OpenRouter Key Icon */}
                     <div className="relative">
@@ -36,6 +41,7 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
+
             </header>
 
             <OpenRouterKeyModal />
