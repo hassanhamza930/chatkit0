@@ -1,9 +1,9 @@
-import type { Message } from '@/app/interfaces';
+import type { MessageInterface } from '@/app/interfaces';
 import { cn } from '@/lib/utils';
 import { Brain } from 'lucide-react';
 import { MarkdownRenderer } from './MarkdownRenderer';
 
-export function Message({ id, content, sender, timestamp, selectedModel }: Message) {
+export function Message({ id, content, sender, timestamp, selectedModel }: MessageInterface) {
     return (
         <div className={`w-full`}>
             <div className={cn("flex flex-col p-5 rounded-lg w-full text-white", sender === "user" ? "bg-transparent" : "bg-white/5")}>

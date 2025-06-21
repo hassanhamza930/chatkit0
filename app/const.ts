@@ -1,4 +1,4 @@
-import { Model } from "./interfaces";
+import { ModelInterface } from "./interfaces";
 
 export const availableModels = [
     {
@@ -22,13 +22,6 @@ export const availableModels = [
         thinking: true
     },
     {
-        name: "o3",
-        value: "openai/o3",
-        logo: "/openai.png",
-        byok: true,
-        thinking: true
-    },
-    {
         name: "Claude 3.7 Sonnet",
         value: "anthropic/claude-3.7-sonnet",
         logo: "/anthropic.png",
@@ -41,4 +34,10 @@ export const availableModels = [
         byok: true,
         thinking: true
     }
-] as Array<Model>;
+] as Array<ModelInterface>;
+
+
+export const hideScrollbar = {
+    scrollbarWidth: 'none', // Firefox
+    msOverflowStyle: 'none', // IE and Edge
+} as const;

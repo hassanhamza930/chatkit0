@@ -1,24 +1,27 @@
-import { Message } from "@/app/chat/components/Message";
-import { useMessageStore } from "@/app/chat/store/store";
-import type { Message as MessageType } from "@/app/interfaces";
+import { MessageInterface, ModelInterface } from "@/app/interfaces";
+import { Message } from "./Message";
+import { hideScrollbar } from "@/app/const";
+import { useChatStore } from "../store/store";
 
-// Hide scrollbar while keeping functionality
-const hideScrollbar = {
-  scrollbarWidth: 'none', // Firefox
-  msOverflowStyle: 'none', // IE and Edge
-} as const;
 
 export function MessagesArea() {
-    const { messages } = useMessageStore();
+
+    const { selectedChat } = useChatStore();
 
     return (
-        <div 
-            className="h-full flex flex-col justify-start items-center py-10 pt-24 gap-y-4 w-full overflow-y-auto pr-3" 
+        <div
+            className="h-full flex flex-col justify-start items-center py-10 pt-24 gap-y-2 w-full overflow-y-auto"
             style={hideScrollbar as React.CSSProperties}
         >
-            {messages.map((message) => (
-                <Message key={message.id} {...message} />
-            ))}
+            {
+                selectedChat?.messages.map((message) => (
+                    <Message
+                        key={message.id}
+                        {...message}
+                    />
+                ))
+            }
+
         </div>
     );
 }

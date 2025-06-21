@@ -2,9 +2,13 @@
 import { FaCheck, FaExclamation, FaKey } from "react-icons/fa";
 import { useInputBoxStore } from "../InputBox/store/inputboxstore";
 import OpenRouterKeyModal from "./components/OpenRouterKeyModal";
+import { useChatStore } from "@/app/chat/store/store";
+import useHeaderLogic from "./logic/useIHeaderLogic";
 
 export default function Header() {
+    useHeaderLogic();
     const { openrouterKey, setOpenrouterKeyModalOpen } = useInputBoxStore();
+    const { selectedChat } = useChatStore();
 
     const handleOpenModal = () => {
         setOpenrouterKeyModalOpen(true);
@@ -12,12 +16,14 @@ export default function Header() {
 
     return (
         <>
-            <header style={{fontFamily:""}} className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-6 py-5 backdrop-blur-[10px] bg-gradient-to-b from-black to-black/90 [mask-image:linear-gradient(to_bottom,white_20%,transparent_100%)]">
-                
+            <header className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-6 py-4 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-3xl">
+
                 <div className="flex flex-row justify-start items-center">
-                    <h1 className="text-xl font-semibold text-center text-white">ChatKit is really Good</h1>
+                    <h1 style={{ fontFamily: "DM Sans" }} className="text-xl font-bold subpixel-antialiased tracking-tight text-center text-white/80">
+                        {selectedChat?.name || "New Chat"}
+                    </h1>
                 </div>
-                
+
                 <div className="flex items-center gap-4">
                     {/* OpenRouter Key Icon */}
                     <div className="relative">

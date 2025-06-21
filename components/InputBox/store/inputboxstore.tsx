@@ -1,12 +1,12 @@
 import { availableModels } from '@/app/const';
 import { create } from 'zustand'
-import { Model } from '@/app/interfaces';
+import { ModelInterface } from '@/app/interfaces';
 
 interface InputBoxState {
   searchQuery: string
-  selectedModel: Model | null
+  selectedModel: ModelInterface | null
   setSearchQuery: (query: string) => void
-  setSelectedModel: (model: Model) => void
+  setSelectedModel: (model: ModelInterface) => void
   clearSearchQuery: () => void
   openrouterKey: string
   setOpenrouterKey: (key: string) => void
@@ -20,7 +20,7 @@ export const useInputBoxStore = create<InputBoxState>((set) => ({
   searchQuery: '',
   selectedModel: availableModels[0], // Default to null, will be set in logic
   setSearchQuery: (query: string) => set({ searchQuery: query }),
-  setSelectedModel: (model: Model) => set({ selectedModel: model }),
+  setSelectedModel: (model: ModelInterface) => set({ selectedModel: model }),
   clearSearchQuery: () => set({ searchQuery: '' }),
   openrouterKey: '',
   setOpenrouterKey: (key: string) => set({ openrouterKey: key }),

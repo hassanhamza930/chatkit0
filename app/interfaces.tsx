@@ -1,4 +1,4 @@
-export interface Model {
+export interface ModelInterface {
   name: string;
   value: string;
   logo: string;
@@ -6,17 +6,22 @@ export interface Model {
   thinking?: boolean;
 }
 
-export interface Message {
+export interface MessageInterface {
   id: string;
   content: string;
   sender: 'user' | 'assistant';
   timestamp: Date;
-  selectedModel: Model;
+  selectedModel: ModelInterface;
 }
 
-export interface Chat{
+export interface OpenRouterMessage{
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export interface ChatInterface{
   id: string;
   name: string;
-  messages: Message[];
+  messages: MessageInterface[];
   timeUpdated: Date;
 }

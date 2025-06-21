@@ -3,7 +3,6 @@ import { motion } from "motion/react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaArrowsToCircle, FaBrain, FaExclamation, FaKey } from "react-icons/fa6";
-import useInputBoxLogic from "./logic/useInputBoxLogic";
 import { Command, Plus, CornerDownLeft } from "lucide-react";
 import { availableModels } from "@/app/const";
 import { useInputBoxStore } from "./store/inputboxstore";
@@ -14,7 +13,6 @@ interface InputBoxProps {
 
 export default function InputBox({ onSubmit }: InputBoxProps) {
 
-    useInputBoxLogic();
     const { searchQuery, setSearchQuery, selectedModel, setSelectedModel, openrouterKey } = useInputBoxStore();
 
 
