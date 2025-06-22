@@ -6,6 +6,7 @@ import { FaArrowRight, FaArrowsToCircle, FaBrain, FaExclamation, FaKey } from "r
 import { Command, Plus, CornerDownLeft } from "lucide-react";
 import { availableModels } from "@/app/const";
 import { useInputBoxStore } from "./store/inputboxstore";
+import { useChatStore } from "@/app/chat/store/store";
 
 interface InputBoxProps {
     onSubmit: () => void;
@@ -14,10 +15,17 @@ interface InputBoxProps {
 export default function InputBox({ onSubmit }: InputBoxProps) {
 
     const { searchQuery, setSearchQuery, selectedModel, setSelectedModel, openrouterKey } = useInputBoxStore();
-
+    const { loadingResponse } = useChatStore();
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
+        if (loadingResponse) {
+            return;
+        }
+        if (e.key === 'Enter' && e.shiftKey) {
+            return;
+        }
+
+        else if (e.key === 'Enter') {
             e.preventDefault();
             onSubmit();
         }
@@ -88,7 +96,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
 
                     <Button
                         onClick={onSubmit}
-                        disabled={searchQuery.length === 0}
+                        disabled={searchQuery.length === 0 || loadingResponse}
                         className={`bg-white/10 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1`}>
 
                         {

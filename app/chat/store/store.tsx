@@ -11,6 +11,7 @@ interface ChatStore {
   updateChat: ({ chatId, chat }: { chatId: string; chat: Partial<ChatInterface> }) => void;
   clearChats: () => void;
   addMessage: ({ message, chatId }: { message: MessageInterface; chatId: string }) => void;
+  updateMessage: ({ messageId, chatId, updates }: { messageId: string; chatId: string; updates: Partial<MessageInterface> }) => void;
   deleteMessage: ({ messageId, chatId }: { messageId: string; chatId: string }) => void;
   selectedChat: ChatInterface | undefined;
   setSelectedChat: ({ chat }: { chat: ChatInterface }) => void;
@@ -62,6 +63,35 @@ export const useChatStore = create<ChatStore>((set) => ({
     // Also update selectedChat if it's the same chat being updated
     const updatedSelectedChat = state.selectedChat?.id === chatId 
       ? { ...state.selectedChat, messages: [...state.selectedChat.messages, message], timeUpdated: new Date() }
+      : state.selectedChat;
+    
+    return {
+      chats: updatedChats,
+      selectedChat: updatedSelectedChat
+    };
+  }),
+  updateMessage: ({ messageId, chatId, updates }) => set((state) => {
+    const updatedChats = state.chats.map(chat => 
+      chat.id === chatId 
+        ? { 
+            ...chat, 
+            messages: chat.messages.map(message => 
+              message.id === messageId ? { ...message, ...updates } : message
+            ),
+            timeUpdated: new Date()
+          } 
+        : chat
+    );
+    
+    // Also update selectedChat if it's the same chat being updated
+    const updatedSelectedChat = state.selectedChat?.id === chatId 
+      ? { 
+          ...state.selectedChat, 
+          messages: state.selectedChat.messages.map(message => 
+            message.id === messageId ? { ...message, ...updates } : message
+          ),
+          timeUpdated: new Date()
+        }
       : state.selectedChat;
     
     return {
