@@ -9,11 +9,14 @@ This project is designed to be a starting point for building powerful and custom
 ### Features
 
 - **Multi-Model Support**: Access any LLM supported by OpenRouter.ai.
+- **BYOK (Bring Your Own Key)**: Provide your own OpenRouter API key to use premium models. If no key is provided, the application can fall back to a default key for free models. Your key is stored securely in the browser's local storage.
+- **Real-time Streaming**: Responses from the LLMs are streamed in real-time, providing a smooth and responsive user experience.
 - **Clean UI**: A modern and responsive user interface built with Next.js, TypeScript, and Tailwind CSS.
 - **Chat History**: Your conversations are saved locally, allowing you to switch between them.
 - **Markdown Rendering**: Messages are rendered with markdown support, including code blocks with syntax highlighting.
 - **Local Storage**: API keys and chat history are stored in your browser's local storage.
 - **Responsive Design**: The application is designed to work on both desktop and mobile devices.
+- **Clean Codebase**: The project follows a clean and organized structure, separating UI components from business logic (custom hooks), making it easy to understand, maintain, and extend.
 
 ## Getting Started
 
@@ -38,6 +41,11 @@ Make sure you have Node.js and npm (or yarn/pnpm) installed on your machine.
     ```sh
     npm install
     ```
+3.  Set up environment variables. Create a file named `.env.local` in the root of your project and add the following:
+    ```sh
+    NEXT_PUBLIC_OPENROUTER_KEY="your_openrouter_api_key"
+    ```
+    This key will be used as a fallback if no key is provided in the application's UI. You can get an API key from [OpenRouter.ai](https://openrouter.ai/).
 
 ### Running the Application
 
