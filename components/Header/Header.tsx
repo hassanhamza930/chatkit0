@@ -4,15 +4,16 @@ import { useInputBoxStore } from "../InputBox/store/inputboxstore";
 import OpenRouterKeyModal from "./components/OpenRouterKeyModal";
 import { useChatStore } from "@/app/chat/store/store";
 import useHeaderLogic from "./logic/useIHeaderLogic";
+import { memo, useCallback } from "react";
 
-export default function Header() {
+const HeaderComponent = () => {
     useHeaderLogic();
     const { openrouterKey, setOpenrouterKeyModalOpen } = useInputBoxStore();
-    const { selectedChat } = useChatStore();
+    const chatName = useChatStore(state => state.selectedChat?.name);
 
-    const handleOpenModal = () => {
+    const handleOpenModal = useCallback(() => {
         setOpenrouterKeyModalOpen(true);
-    };
+    }, [setOpenrouterKeyModalOpen]);
 
     return (
         <>
@@ -20,7 +21,7 @@ export default function Header() {
 
                 <div className="flex flex-row justify-start items-center">
                     <h1 style={{ fontFamily: "DM Sans" }} className="text-xl font-semibold subpixel-antialiased tracking-tight text-center text-white/80">
-                        {selectedChat?.name.slice(0, 20) + (selectedChat?.name.length && selectedChat?.name.length > 20 ? "..." : "") || "New Chat"}
+                        {chatName?.slice(0, 20) + (chatName?.length && chatName?.length > 20 ? "..." : "") || "New Chat"}
                     </h1>
                 </div>
 
@@ -54,3 +55,5 @@ export default function Header() {
         </>
     );
 } 
+
+export default memo(HeaderComponent); 

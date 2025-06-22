@@ -2,8 +2,9 @@ import type { MessageInterface } from '@/app/interfaces';
 import { cn } from '@/lib/utils';
 import { Brain } from 'lucide-react';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import { memo } from 'react';
 
-export function Message({ id, content, sender, timestamp, selectedModel }: MessageInterface) {
+const MessageComponent = ({ id, content, sender, timestamp, selectedModel }: MessageInterface) => {
 
     const isAssistantWithEmptyContent = sender === 'assistant' && (!content || content.trim() === '');
     
@@ -49,3 +50,5 @@ export function Message({ id, content, sender, timestamp, selectedModel }: Messa
         </div>
     );
 }
+
+export const Message = memo(MessageComponent);

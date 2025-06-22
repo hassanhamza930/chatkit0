@@ -7,17 +7,18 @@ import { Command, Plus, CornerDownLeft } from "lucide-react";
 import { availableModels } from "@/app/const";
 import { useInputBoxStore } from "./store/inputboxstore";
 import { useChatStore } from "@/app/chat/store/store";
+import { memo, useCallback } from "react";
 
 interface InputBoxProps {
     onSubmit: () => void;
 }
 
-export default function InputBox({ onSubmit }: InputBoxProps) {
+const InputBox = memo(({ onSubmit }: InputBoxProps) => {
 
     const { searchQuery, setSearchQuery, selectedModel, setSelectedModel, openrouterKey } = useInputBoxStore();
     const { loadingResponse } = useChatStore();
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (loadingResponse) {
             return;
         }
@@ -29,12 +30,12 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
             e.preventDefault();
             onSubmit();
         }
-    };
+    }, [loadingResponse, onSubmit]);
 
-    const handleModelChange = (value: string) => {
+    const handleModelChange = useCallback((value: string) => {
         const model = availableModels.find(m => m.value === value);
         setSelectedModel(model!);
-    };
+    }, [setSelectedModel]);
 
 
     return (
@@ -118,4 +119,6 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
 
         </motion.div>
     )
-}
+})
+
+export default InputBox;

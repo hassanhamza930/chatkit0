@@ -2,11 +2,11 @@ import { MessageInterface, ModelInterface } from "@/app/interfaces";
 import { Message } from "./Message";
 import { hideScrollbar } from "@/app/const";
 import { useChatStore } from "../store/store";
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 
-export function MessagesArea() {
+const MessagesAreaComponent = () => {
 
-    const { selectedChat } = useChatStore();
+    const messages = useChatStore(state => state.selectedChat?.messages);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     // Auto-scroll to bottom when new messages are added
@@ -14,7 +14,7 @@ export function MessagesArea() {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth"});
         }
-    }, [selectedChat?.messages]);
+    }, [messages]);
 
     return (
         <div
@@ -22,7 +22,7 @@ export function MessagesArea() {
             style={hideScrollbar as React.CSSProperties}
         >
             {
-                selectedChat?.messages.map((message) => (
+                messages?.map((message) => (
                     <Message
                         key={message.id}
                         {...message}
@@ -34,3 +34,5 @@ export function MessagesArea() {
         </div>
     );
 }
+
+export const MessagesArea = memo(MessagesAreaComponent);

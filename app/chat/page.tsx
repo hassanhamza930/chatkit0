@@ -12,6 +12,7 @@ import { useChatStore } from "./store/store";
 import { toast } from "sonner";
 import { callOpenRouter } from "./logic/chatUtils";
 import { availableModels } from "../const";
+import { useCallback } from "react";
 
 export default function Chat() {
     useChatsLogic();
@@ -20,7 +21,10 @@ export default function Chat() {
     const { addMessage, selectedChat, setSelectedChat, addChat, chats, updateChat } = useChatStore();
 
 
-    const handleSubmit = async () => {
+    const handleSubmit = useCallback(async () => {
+        const { searchQuery, selectedModel, openrouterKey } = useInputBoxStore.getState();
+        const { selectedChat } = useChatStore.getState();
+
         if (!searchQuery) return;
 
         var messageToSubmit: MessageInterface = {
@@ -77,7 +81,7 @@ export default function Chat() {
             toast.error("No chat selected");
         }
 
-    };
+    }, [addMessage, setSearchQuery, updateChat]);
 
     return (
         <div className="w-full flex flex-row justify-center items-center h-full overflow-hidden">
