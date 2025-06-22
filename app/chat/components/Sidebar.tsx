@@ -64,6 +64,7 @@ export function Sidebar() {
               onClick={() => {
                 if (confirm("Are you sure you want to delete all chats?")) {
                   clearChats();
+                  window.location.reload();
                 }
               }}
               className="text-[11px] font-normal text-white/40 hover:text-white/60 cursor-pointer mb-2">Delete all Chats</button>

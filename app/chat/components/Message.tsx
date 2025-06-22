@@ -4,6 +4,9 @@ import { Brain } from 'lucide-react';
 import { MarkdownRenderer } from './MarkdownRenderer';
 
 export function Message({ id, content, sender, timestamp, selectedModel }: MessageInterface) {
+
+    const isAssistantWithEmptyContent = sender === 'assistant' && (!content || content.trim() === '');
+    
     return (
         <div className={`w-full`}>
             <div className={cn("flex flex-col p-5 rounded-lg w-full text-white", sender === "user" ? "bg-transparent" : "bg-white/5")}>
@@ -16,7 +19,21 @@ export function Message({ id, content, sender, timestamp, selectedModel }: Messa
                 </div>
 
                 <div className="text-base leading-relaxed opacity-90 break-words overflow-x-hidden">
-                    <MarkdownRenderer content={content} className="prose prose-invert max-w-none prose-p:my-2 prose-headings:my-4 prose-ul:my-2 prose-ol:my-2 prose-li:my-1" />
+                    {isAssistantWithEmptyContent ? (
+                    // {true ? (
+                        <div className="animate-pulse mt-4">
+                            <div className="flex flex-row justify-start items-center space-x-2">
+                                <div className="flex space-x-1">
+                                    <div className="w-1 h-1 bg-white/60 rounded-full animate-bounce"></div>
+                                    <div className="w-1 h-1 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                    <div className="w-1 h-1 bg-white/60 rounded-full animate-bounce-slow" style={{ animationDelay: '0.2s' }}></div>
+                                </div>
+                                <span className="text-white/60 text-sm">Thinking</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <MarkdownRenderer content={content} className="prose prose-invert max-w-none prose-p:my-2 prose-headings:my-4 prose-ul:my-2 prose-ol:my-2 prose-li:my-1" />
+                    )}
                 </div>
 
                 <div className="flex justify-end opacity-80">
