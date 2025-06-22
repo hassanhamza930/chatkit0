@@ -41,7 +41,7 @@ Make sure you have Node.js and npm (or yarn/pnpm) installed on your machine.
     ```sh
     npm install
     ```
-3.  Set up environment variables. Create a file named `.env.local` in the root of your project and add the following:
+3.  Set up environment variables. Create a file named `.env` in the root of your project and add the following:
     ```sh
     NEXT_PUBLIC_OPENROUTER_KEY="your_openrouter_api_key"
     ```
