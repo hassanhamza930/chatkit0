@@ -17,7 +17,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
 
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+        if (e.key === 'Enter') {
             e.preventDefault();
             onSubmit();
         }
@@ -89,7 +89,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
                     <Button
                         onClick={onSubmit}
                         disabled={searchQuery.length === 0}
-                        className={`bg-white/5 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1`}>
+                        className={`bg-white/10 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1`}>
 
                         {
                             selectedModel?.byok == true && openrouterKey == "" ?
@@ -98,14 +98,7 @@ export default function InputBox({ onSubmit }: InputBoxProps) {
                                     <span className="text-xs">Missing OpenRouter Key</span>
                                 </div>
                                 :
-                                searchQuery.length > 0 ?
-                                    <div className="flex flex-row justify-center items-center gap-1">
-                                        <Command style={{ width: '12px', height: '12px' }} />
-                                        <Plus style={{ width: '12px', height: '12px' }} />
-                                        <CornerDownLeft style={{ width: '12px', height: '12px' }} />
-                                    </div>
-                                    :
-                                    <FaArrowRight style={{ width: '10px', height: '12px' }} />
+                                <FaArrowRight style={{ width: '10px', height: '12px' }} />
                         }
 
 

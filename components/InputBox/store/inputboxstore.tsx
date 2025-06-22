@@ -12,8 +12,7 @@ interface InputBoxState {
   setOpenrouterKey: (key: string) => void
   openrouterKeyModalOpen: boolean
   setOpenrouterKeyModalOpen: (open: boolean) => void
-  loadingResponse: boolean
-  setLoadingResponse: (loading: boolean) => void
+
 }
 
 export const useInputBoxStore = create<InputBoxState>((set) => ({
@@ -26,6 +25,5 @@ export const useInputBoxStore = create<InputBoxState>((set) => ({
   setOpenrouterKey: (key: string) => set({ openrouterKey: key }),
   openrouterKeyModalOpen: false,
   setOpenrouterKeyModalOpen: (open: boolean) => set({ openrouterKeyModalOpen: open }),
-  loadingResponse: false,
-  setLoadingResponse: (loading: boolean) => set({ loadingResponse: loading }),
+
 }))

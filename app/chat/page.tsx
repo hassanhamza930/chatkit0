@@ -69,20 +69,22 @@ export default function Chat() {
                 chatId: selectedChat.id,
                 message: messageToSubmit
             })
+
+            setSearchQuery("");
+
         }
         else {
             toast.error("No chat selected");
         }
 
-        setSearchQuery("");
     };
 
     return (
-        <div className="w-full flex flex-row justify-center items-center h-full">
+        <div className="w-full flex flex-row justify-center items-center h-full overflow-hidden">
 
             <Sidebar />
 
-            <div className="relative z-0 h-full w-full px-[10%] flex flex-col justify-center items-center bg-white/5">
+            <div className="relative z-0 h-full w-full px-[10%] flex flex-col justify-center items-center bg-white/5 overflow-hidden">
                 <Header />
                 <MessagesArea />
                 <div className="h-auto w-full py-10 flex justify-center items-center">

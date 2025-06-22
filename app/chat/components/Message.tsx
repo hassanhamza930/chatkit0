@@ -15,7 +15,7 @@ export function Message({ id, content, sender, timestamp, selectedModel }: Messa
                     </span>
                 </div>
 
-                <div className="text-base leading-relaxed opacity-90 break-words">
+                <div className="text-base leading-relaxed opacity-90 break-words overflow-x-hidden">
                     <MarkdownRenderer content={content} className="prose prose-invert max-w-none prose-p:my-2 prose-headings:my-4 prose-ul:my-2 prose-ol:my-2 prose-li:my-1" />
                 </div>
 

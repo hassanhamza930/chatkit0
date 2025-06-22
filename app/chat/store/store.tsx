@@ -14,6 +14,8 @@ interface ChatStore {
   deleteMessage: ({ messageId, chatId }: { messageId: string; chatId: string }) => void;
   selectedChat: ChatInterface | undefined;
   setSelectedChat: ({ chat }: { chat: ChatInterface }) => void;
+  loadingResponse: boolean;
+  setLoadingResponse: (loading: boolean) => void;
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -83,5 +85,7 @@ export const useChatStore = create<ChatStore>((set) => ({
     };
   }),
   selectedChat: undefined,
-  setSelectedChat: ({ chat }) => set({ selectedChat: chat })
+  setSelectedChat: ({ chat }) => set({ selectedChat: chat }),
+  loadingResponse: false,
+  setLoadingResponse: (loading: boolean) => set({ loadingResponse: loading })
 }));

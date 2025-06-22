@@ -13,7 +13,7 @@ const markdownStyles = {
   paragraph: 'my-3 leading-relaxed',
   list: 'my-2 pl-6 space-y-1',
   listItem: 'my-1',
-  codeBlock: 'bg-white/90 text-black rounded-lg p-4 my-4 overflow-x-auto',
+  codeBlock: 'bg-white/90 text-black',
   inlineCode: 'bg-white/90 text-black px-1.5 py-0.5 rounded text-sm',
   blockquote: 'border-l-4 border-blue-500 pl-4 py-1 my-4 text-gray-300 italic',
   table: 'w-full my-4 border-collapse border border-gray-700',
@@ -32,7 +32,7 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
   return (
-    <div className={className}>
+    <div className={`${className} overflow-hidden`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight, rehypeRaw]}
@@ -44,20 +44,20 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           h4: ({ node, ...props }) => <h4 className={`${markdownStyles.heading} text-base`} {...props} />,
           h5: ({ node, ...props }) => <h5 className={`${markdownStyles.heading} text-sm`} {...props} />,
           h6: ({ node, ...props }) => <h6 className={`${markdownStyles.heading} text-xs`} {...props} />,
-          
+
           // Paragraphs
           p: ({ node, ...props }) => <p className={markdownStyles.paragraph} {...props} />,
-          
+
           // Links
           a: ({ node, ...props }) => (
-            <a 
-              {...props} 
-              target="_blank" 
+            <a
+              {...props}
+              target="_blank"
               rel="noopener noreferrer"
               className={`${markdownStyles.link} hover:opacity-80 transition-opacity`}
             />
           ),
-          
+
           // Code blocks and inline code
           code: ({
             node,
@@ -68,18 +68,27 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           }: React.HTMLAttributes<HTMLElement> & { inline?: boolean; node?: any }) => {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
-              <pre className={markdownStyles.codeBlock}>
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              </pre>
+              <div className="relative w-full my-4" style={{ overflow: 'hidden', contain: 'layout' }}>
+                <div className="w-full rounded-lg code-block-scrollbar" style={{ overflow: 'auto', maxHeight: '600px', position: 'relative' }}>
+                  <pre className={`${markdownStyles.codeBlock}`} style={{
+                    margin: 0,
+                    overflow: 'visible',
+                    minWidth: 'fit-content',
+                    whiteSpace: 'pre'
+                  }}>
+                    <code className={`${className} block`} {...props}>
+                      {children}
+                    </code>
+                  </pre>
+                </div>
+              </div>
             ) : (
               <code className={markdownStyles.inlineCode} {...props}>
                 {children}
               </code>
             );
           },
-          
+
           // Lists
           ul: ({ node, ...props }) => (
             <ul className={`${markdownStyles.list} list-disc`} {...props} />
@@ -90,12 +99,12 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           li: ({ node, ...props }) => (
             <li className={markdownStyles.listItem} {...props} />
           ),
-          
+
           // Blockquotes
           blockquote: ({ node, ...props }) => (
             <blockquote className={markdownStyles.blockquote} {...props} />
           ),
-          
+
           // Tables
           table: ({ node, ...props }) => (
             <div className="overflow-x-auto">
@@ -111,17 +120,17 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           td: ({ node, ...props }) => (
             <td className={markdownStyles.tableCell} {...props} />
           ),
-          
+
           // Horizontal rule
           hr: ({ node, ...props }) => (
             <hr className={markdownStyles.divider} {...props} />
           ),
-          
+
           // Images
           img: ({ node, ...props }) => (
             <img className={markdownStyles.image} {...props} />
           ),
-          
+
           // Inline elements
           strong: ({ node, ...props }) => <strong className="font-semibold" {...props} />,
           em: ({ node, ...props }) => <em className="italic" {...props} />,

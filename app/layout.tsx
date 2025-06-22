@@ -24,7 +24,7 @@ export default function RootLayout({
       </head>
       <body
         style={{ fontFamily: "Geist" }}
-        className={`subpixel-antialiased bg-zinc-950 h-screen w-full`}
+        className={`subpixel-antialiased bg-zinc-950 h-screen w-full overflow-hidden`}
       >
         <Toaster position="top-right" duration={1000} richColors />
         {children}

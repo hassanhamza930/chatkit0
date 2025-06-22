@@ -19,8 +19,8 @@ export default function Header() {
             <header className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-6 py-4 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-3xl">
 
                 <div className="flex flex-row justify-start items-center">
-                    <h1 style={{ fontFamily: "DM Sans" }} className="text-xl font-bold subpixel-antialiased tracking-tight text-center text-white/80">
-                        {selectedChat?.name || "New Chat"}
+                    <h1 style={{ fontFamily: "DM Sans" }} className="text-xl font-semibold subpixel-antialiased tracking-tight text-center text-white/80">
+                        {selectedChat?.name.slice(0, 20) + (selectedChat?.name.length && selectedChat?.name.length > 20 ? "..." : "") || "New Chat"}
                     </h1>
                 </div>
 
