@@ -1,50 +1,55 @@
-# Project Architecture and Approach
+# ChatKit0
+![image](https://github.com/user-attachments/assets/f0a5c460-0b78-4185-9468-b34256b15269)
+ChatKit0 is a sleek, modern chat application that serves as an abstraction layer over the OpenRouter.ai API. It provides a clean and intuitive interface for interacting with a variety of large language models (LLMs) available through OpenRouter.
 
-## Logic and UI Separation
+## About The Project
 
-Throughout this project, logic and UI are separated to ensure maintainability and scalability. The approach is as follows:
+This project is designed to be a starting point for building powerful and customizable chat applications. By leveraging OpenRouter, it allows you to easily switch between different LLMs from various providers without changing the core application logic. Your API keys are stored securely in your browser's local storage and are never transmitted anywhere else.
 
-- **Logic**: All business logic and state management are encapsulated within React custom hooks. These hooks should be created in the `hooks` folder within the specific route folder of the Next.js project. This keeps components clean and focused on rendering.
-- **UI**: For all UI elements, only the shared shadCN components located in the root `components` folder are used. These components provide a consistent design system across the application.
-- **Component Modification**: shadCN components will only be edited or extended when explicitly requested.
+### Features
 
-## Recent Changes
+- **Multi-Model Support**: Access any LLM supported by OpenRouter.ai.
+- **Clean UI**: A modern and responsive user interface built with Next.js, TypeScript, and Tailwind CSS.
+- **Chat History**: Your conversations are saved locally, allowing you to switch between them.
+- **Markdown Rendering**: Messages are rendered with markdown support, including code blocks with syntax highlighting.
+- **Local Storage**: API keys and chat history are stored in your browser's local storage.
+- **Responsive Design**: The application is designed to work on both desktop and mobile devices.
 
-### 2025-04-20
-- Documented the new single-function API for `useResumeLogic` and the new `prompts.ts` file for centralized prompt management.
+## Getting Started
 
-### 2025-04-18
-- Refactored `useResumeLogic` hook to expose only a single function: `generateResumeContent`, which handles both resume creation and update based on a `userRequest` parameter.
--## useResumeLogic Hook (API)
+Follow these steps to get a local copy up and running.
 
-The `useResumeLogic` hook now exposes only two functions:
+### Prerequisites
 
-```typescript
-const { generateResumeContent, generateResumeName } = useResumeLogic({ userId });
+Make sure you have Node.js and npm (or yarn/pnpm) installed on your machine.
+
+- npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/your_username/chatkit0.git
+    ```
+2.  Install NPM packages
+    ```sh
+    npm install
+    ```
+
+### Running the Application
+
+To run the app in development mode, use the following command. This will start the development server on `http://localhost:3000`.
+
+```sh
+npm run dev
 ```
 
-### Usage
-- To **create** a resume:
-  ```typescript
-  generateResumeContent({ mode: 'create', jobDescription, companyInfo })
-  ```
-- To **update** a resume:
-  ```typescript
-  generateResumeContent({ mode: 'update', resumeId, customizationInput, originalResume })
-  ```
-- To **generate a resume name**:
-  ```typescript
-  const name = await generateResumeName(jobDescription, companyInfo);
-  ```
+## Usage
 
-All fallback and helper functions have been removed for clarity and simplicity. Only these two functions are available for use in the UI and business logic.
-
-## Prompt Management
-
-All system and user prompt templates for resume generation are now stored in `app/prompts.ts` at the app root. Import and use these templates in your logic as needed:
-
-```typescript
-import * as prompts from '@/app/prompts';
-```
-
-This keeps prompt management centralized and maintainable.
+1.  Once the application is running, open it in your browser at `http://localhost:3000`.
+2.  Click on the "API Key" button in the header to add your OpenRouter API key. You can get an API key from [OpenRouter.ai](https://openrouter.ai/).
+3.  Once you've added your key, you can start a new chat and select any of the available models.
+4.  Your chats will be saved in the sidebar, and you can switch between them at any time.
