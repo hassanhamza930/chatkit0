@@ -1,9 +1,12 @@
 import { ChatInterface } from "@/app/interfaces";
 import { useChatStore } from "../store/store";
-import { Plus } from "lucide-react";
+import { Plus, Menu, X } from "lucide-react";
 import { FaPlus, FaPlusSquare, FaRegPlusSquare } from "react-icons/fa";
 import { hideScrollbar } from "@/app/const";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 
 const ChatCard = memo(({ chat, isSelected, onClick }: { chat: ChatInterface, isSelected: boolean, onClick: (chat: ChatInterface) => void }) => {
@@ -16,8 +19,7 @@ const ChatCard = memo(({ chat, isSelected, onClick }: { chat: ChatInterface, isS
   )
 })
 
-const SidebarComponent = () => {
-
+const SidebarContent = memo(({ onChatSelect }: { onChatSelect?: () => void }) => {
   const { chats, addChat, clearChats, selectedChat, setSelectedChat } = useChatStore();
 
   const handleCreateNewChat = useCallback(() => {
@@ -29,7 +31,8 @@ const SidebarComponent = () => {
         timeUpdated: new Date()
       }
     });
-  }, [addChat]);
+    onChatSelect?.();
+  }, [addChat, onChatSelect]);
 
   const handleClearChats = useCallback(() => {
     if (confirm("Are you sure you want to delete all chats?")) {
@@ -40,26 +43,23 @@ const SidebarComponent = () => {
 
   const handleSelectChat = useCallback((chat: ChatInterface) => {
     setSelectedChat({ chat });
-  }, [setSelectedChat]);
+    onChatSelect?.();
+  }, [setSelectedChat, onChatSelect]);
 
   const sortedChats = useMemo(() => {
     return [...chats].sort((a, b) => new Date(b.timeUpdated).getTime() - new Date(a.timeUpdated).getTime());
   }, [chats]);
 
-
   return (
-    <div style={{ fontFamily: "DM Sans" }} className="h-full w-72 bg-white/10 flex flex-col justify-start items-center flex-none px-3">
+    <div style={{ fontFamily: "DM Sans" }} className="h-full w-full bg-white/10 flex flex-col justify-start items-center px-3">
       <button
         onClick={handleCreateNewChat}
         className="w-full mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 rounded-lg text-white font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2 group backdrop-blur-sm cursor-pointer">
         Create New Chat
       </button>
 
-
-
       <div className="w-full h-px bg-white/10 my-4 mb-2">
       </div>
-
 
       {
         chats.length > 0 && (
@@ -90,10 +90,50 @@ const SidebarComponent = () => {
               onClick={handleSelectChat}
             />
           ))}
-
-
       </div>
+    </div>
+  );
+});
 
+const SidebarComponent = () => {
+  const isMobile = useIsMobile();
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (isMobile) {
+    return (
+      <>
+        {/* Mobile Menu Button */}
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="fixed top-2 left-4 z-50 md:hidden bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white h-8 w-8"
+            >
+              <Menu className="h-4 w-4" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent 
+            side="left" 
+            className="w-80 bg-zinc-950 border-white/20 p-0"
+            onOpenAutoFocus={(e) => e.preventDefault()}
+          >
+            <SheetHeader className="p-4 border-b border-white/10">
+              <SheetTitle className="text-white font-semibold">Chats</SheetTitle>
+            </SheetHeader>
+            <div className="h-full overflow-hidden">
+              <SidebarContent onChatSelect={() => setIsOpen(false)} />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </>
+    );
+  }
+
+  // Desktop sidebar
+  return (
+    <div className="hidden md:flex h-full w-72 flex-none">
+      <SidebarContent />
     </div>
   );
 }

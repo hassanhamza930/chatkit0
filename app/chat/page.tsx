@@ -88,10 +88,10 @@ export default function Chat() {
 
             <Sidebar />
 
-            <div className="relative z-0 h-full w-full px-[10%] flex flex-col justify-center items-center bg-white/5 overflow-hidden">
+            <div className="relative z-0 h-full w-full px-4 md:px-[10%] flex flex-col justify-center items-center bg-white/5 overflow-hidden">
                 <Header />
                 <MessagesArea />
-                <div className="h-auto w-full py-10 flex justify-center items-center">
+                <div className="h-auto w-full py-6 md:py-10 flex justify-center items-center">
                     <InputBox onSubmit={handleSubmit} />
                 </div>
 

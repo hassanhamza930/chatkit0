@@ -71,12 +71,12 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
 
-                <div className="flex flex-row justify-between items-center w-full">
+                <div className="flex flex-row justify-between items-center w-full gap-3">
 
-                    <div className="flex-row flex justify-start items-center">
+                    <div className="flex-row flex justify-start items-center flex-1">
 
                         <Select value={selectedModel?.value || ''} onValueChange={handleModelChange}>
-                            <SelectTrigger className="bg-transparent text-white/90 border border-white/60 rounded-lg px-3 text-xs outline-none w-fit shadow-sm font-medium shadow-white/20">
+                            <SelectTrigger className="bg-transparent text-white/90 border border-white/60 rounded-lg px-3 text-xs outline-none w-full sm:w-fit shadow-sm font-medium shadow-white/20">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-zinc-950 border-white/20 text-xs outline-none">
@@ -98,13 +98,14 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
                     <Button
                         onClick={onSubmit}
                         disabled={searchQuery.length === 0 || loadingResponse}
-                        className={`bg-white/10 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1`}>
+                        className={`bg-white/10 shadow-sm border-[1px] ${searchQuery.length > 0 ? 'border-white/60 text-white' : 'border-white/80 text-white/80'} hover:opacity-50 transition-all duration-300 h-8 rounded-sm flex flex-row justify-center items-center gap-1 px-3 flex-shrink-0`}>
 
                         {
                             selectedModel?.byok == true && openrouterKey == "" ?
                                 <div className="flex flex-row justify-center items-center gap-2 text-yellow-400">
                                     <FaKey style={{ width: '12px', height: '12px' }} />
-                                    <span className="text-xs">Missing OpenRouter Key</span>
+                                    <span className="text-xs hidden sm:inline">Missing OpenRouter Key</span>
+                                    <span className="text-xs sm:hidden">Key</span>
                                 </div>
                                 :
                                 <FaArrowRight style={{ width: '10px', height: '12px' }} />
