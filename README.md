@@ -1,4 +1,5 @@
 # ChatKit0
+![image](https://github.com/user-attachments/assets/2f0e8547-82fa-4be1-89df-6b4db3951f1f)
 ![image](https://github.com/user-attachments/assets/f0a5c460-0b78-4185-9468-b34256b15269)
 ChatKit0 is a sleek, modern chat application that serves as an abstraction layer over the OpenRouter.ai API. It provides a clean and intuitive interface for interacting with a variety of large language models (LLMs) available through OpenRouter.
 
