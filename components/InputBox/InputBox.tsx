@@ -68,7 +68,7 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
             {/* Main content */}
             <div
                 style={{ fontFamily: "Geist", resize: "none" }}
-                className="relative shadow-xl shadow-white/5 bg-white/5 rounded-2xl overflow-hidden p-0 border border-white/20 outline-none placeholder:text-white/50 text-white/90 flex flex-col gap-y-5">
+                className="relative shadow-xl shadow-white/5 bg-white/5 rounded-2xl overflow-visible p-0 border border-white/20 outline-none placeholder:text-white/50 text-white/90 flex flex-col gap-y-5">
                 <textarea
                     placeholder="Ask me anything..."
                     value={searchQuery}
@@ -124,7 +124,7 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
                 </div>
 
                 {showSuggestions && suggestions.length > 0 && (
-                    <div className="bottom-full left-0 w-full bg-zinc-900 text-white border border-white/20 rounded-lg p-2 z-10">
+                    <div className="absolute top-full mt-4 left-0 w-full bg-zinc-900 text-white border border-white/20 rounded-lg p-2 z-10">
                         {suggestions.map((suggestion, index) => (
                             <div
                                 key={index}
