@@ -3,6 +3,7 @@ import { SuggestionInterface, ModelInterface, MessageInterface } from "@/app/int
 import { callOpenRouter } from "@/app/chat/logic/chatUtils";
 import { availableModels } from "@/app/const";
 import { parseSuggestionsFromModelResponse } from "../inputboxUtils";
+import { usePathname, useRouter } from "next/navigation";
 
 interface UseSuggestionLogicProps {
   searchQuery: string;
@@ -23,10 +24,12 @@ export const useSuggestionLogic = ({
 }: UseSuggestionLogicProps): UseSuggestionLogicReturn => {
   const [suggestions, setSuggestions] = useState<SuggestionInterface[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const router=useRouter();
+    const pathname=usePathname();
 
   useEffect(() => {
     const handler = setTimeout(async () => {
-      if (searchQuery.length > 5) {
+      if (searchQuery.length > 5 && pathname.includes("/chat")==false) {
         try {
           const geminiFlashModel: ModelInterface = availableModels[0];
 
@@ -71,6 +74,7 @@ export const useSuggestionLogic = ({
       setSearchQuery(suggestionText);
       setSuggestions([]);
       setShowSuggestions(false);
+      router.push('/chat');
     },
     [setSearchQuery]
   );

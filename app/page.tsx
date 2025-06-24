@@ -4,6 +4,7 @@ import BlurRevealText from "@/components/BlurText";
 import InputBox from "@/components/InputBox/InputBox";
 import { useInputBoxStore } from "@/components/InputBox/store/inputboxstore";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 
@@ -12,6 +13,9 @@ export default function Home() {
   const router = useRouter();
   const { openrouterKey, selectedModel, setOpenrouterKeyModalOpen } = useInputBoxStore();
 
+  useEffect(() => {
+    router.prefetch("/chat");
+  }, []);
 
   return (
     <div className="w-full flex flex-col justify-center items-center px-[5%] md:px-[25%] h-full">

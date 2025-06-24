@@ -10,6 +10,8 @@ import { memo, useCallback } from "react"; // Add useCallback back
 import { useSuggestionLogic } from "./hooks/useSuggestionLogic";
 import { availableModels } from "@/app/const"; // Import availableModels back
 import { ModelInterface } from "@/app/interfaces"; // Import ModelInterface back
+import { usePathname } from "next/navigation";
+
 
 interface InputBoxProps {
     onSubmit: () => void;
@@ -19,6 +21,7 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
 
     const { searchQuery, setSearchQuery, selectedModel, setSelectedModel, openrouterKey } = useInputBoxStore();
     const { loadingResponse } = useChatStore();
+    const pathname=usePathname();
 
     const { suggestions, showSuggestions, handleSuggestionClick } = useSuggestionLogic({
         searchQuery,
