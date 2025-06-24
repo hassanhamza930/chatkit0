@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { SuggestionInterface, ModelInterface } from "@/app/interfaces";
+import { SuggestionInterface, ModelInterface, MessageInterface } from "@/app/interfaces";
 import { callOpenRouter } from "@/app/chat/logic/chatUtils";
 import { availableModels } from "@/app/const";
 import { parseSuggestionsFromModelResponse } from "../inputboxUtils";
@@ -26,22 +26,20 @@ export const useSuggestionLogic = ({
 
   useEffect(() => {
     const handler = setTimeout(async () => {
-      if (searchQuery.length > 2) {
+      if (searchQuery.length > 5) {
         try {
-          const geminiFlashModel: ModelInterface = availableModels.find(
-            (model) => model.value === "google/gemini-2.5-flash-preview-05-20"
-          )!;
+          const geminiFlashModel: ModelInterface = availableModels[0];
 
           const messages = [
             {
-              sender: "user" as "user",
+              sender: "user",
               content: `Provide 3 search suggestions for the query "${searchQuery}". Format your response using <suggestion> tags, like this:
 <suggestion>Suggestion text 1</suggestion>
 <suggestion>Suggestion text 2</suggestion>
 <suggestion>Suggestion text 3</suggestion>
 `,
             },
-          ];
+          ] as MessageInterface[];
 
           const modelResponse = await callOpenRouter({
             selectedModel: geminiFlashModel,
@@ -61,7 +59,7 @@ export const useSuggestionLogic = ({
         setSuggestions([]);
         setShowSuggestions(false);
       }
-    }, 500);
+    }, 200);
 
     return () => {
       clearTimeout(handler);

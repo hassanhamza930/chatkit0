@@ -1,8 +1,14 @@
 import { ModelInterface } from "./interfaces";
 
 export const availableModels = [
+     {
+        name: "Gemini 2.5 Flash Lite",
+        value: "google/gemini-2.5-flash-lite-preview-06-17",
+        logo: "/gemini.png",
+        byok: false
+    },
     {
-        name: "Gemini Flash 2.5",
+        name: "Gemini 2.5 Flash",
         value: "google/gemini-2.5-flash-preview-05-20",
         logo: "/gemini.png",
         byok: false
