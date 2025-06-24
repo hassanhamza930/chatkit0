@@ -124,11 +124,11 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
                 </div>
 
                 {showSuggestions && suggestions.length > 0 && (
-                    <div className="absolute top-full mt-4 left-0 w-full bg-zinc-900 text-white border border-white/20 rounded-lg p-2 z-10">
+                    <div className="absolute top-full mt-4 left-0 w-full z-10">
                         {suggestions.map((suggestion, index) => (
                             <div
                                 key={index}
-                                className="p-2 text-white/80 text-xs font-xl hover:bg-white/10 cursor-pointer rounded-md"
+                                className="p-2 py-3 text-white/80 border-b-white/30 border-b-1 text-sm font-xl hover:bg-white/10 cursor-pointer"
                                 onClick={() => handleSuggestionClick(suggestion.text)}
                             >
                                 {suggestion.text}
