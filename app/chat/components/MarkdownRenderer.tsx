@@ -10,7 +10,7 @@ import 'highlight.js/styles/github-dark.css';
 // Custom styles for markdown elements
 const markdownStyles = {
   heading: 'font-semibold mt-6 mb-3',
-  paragraph: 'my-3 leading-relaxed',
+  paragraph: 'my-3 leading-relaxed font-light',
   list: 'my-2 pl-6 space-y-1',
   listItem: 'my-1',
   codeBlock: 'bg-white/90 text-black',
@@ -38,15 +38,15 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
         rehypePlugins={[rehypeHighlight, rehypeRaw]}
         components={{
           // Headings
-          h1: ({ node, ...props }) => <h1 className={`${markdownStyles.heading} text-2xl `} {...props} />,
-          h2: ({ node, ...props }) => <h2 className={`${markdownStyles.heading} text-xl  `} {...props} />,
-          h3: ({ node, ...props }) => <h3 className={`${markdownStyles.heading} text-lg`} {...props} />,
-          h4: ({ node, ...props }) => <h4 className={`${markdownStyles.heading} text-base`} {...props} />,
-          h5: ({ node, ...props }) => <h5 className={`${markdownStyles.heading} text-sm`} {...props} />,
-          h6: ({ node, ...props }) => <h6 className={`${markdownStyles.heading} text-xs`} {...props} />,
+          h1: ({ node, ...props }) => <h1 className={`${markdownStyles.heading} text-xl md:text-2xl `} {...props} />,
+          h2: ({ node, ...props }) => <h2 className={`${markdownStyles.heading} text-lg md:text-xl  `} {...props} />,
+          h3: ({ node, ...props }) => <h3 className={`${markdownStyles.heading} text-base md:text-lg`} {...props} />,
+          h4: ({ node, ...props }) => <h4 className={`${markdownStyles.heading} text-sm md:text-base`} {...props} />,
+          h5: ({ node, ...props }) => <h5 className={`${markdownStyles.heading} text-xs md:text-sm`} {...props} />,
+          h6: ({ node, ...props }) => <h6 className={`${markdownStyles.heading} text-xs md:text-xs`} {...props} />,
 
           // Paragraphs
-          p: ({ node, ...props }) => <p className={markdownStyles.paragraph} {...props} />,
+          p: ({ node, ...props }) => <p className={`${markdownStyles.paragraph} text-sm md:text-base leading-normal`} {...props} />,
 
           // Links
           a: ({ node, ...props }) => (
@@ -132,7 +132,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           ),
 
           // Inline elements
-          strong: ({ node, ...props }) => <strong className="font-semibold" {...props} />,
+          strong: ({ node, ...props }) => <strong className="font-bold" {...props} />,
           em: ({ node, ...props }) => <em className="italic" {...props} />,
           del: ({ node, ...props }) => <del className="line-through" {...props} />,
         } as Components}
