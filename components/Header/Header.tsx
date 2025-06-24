@@ -19,9 +19,9 @@ const HeaderComponent = () => {
 
     return (
         <>
-            <header className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-3 md:px-6 py-4 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-3xl">
+            <header className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-3 md:px-3 py-4 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-3xl">
 
-                <div className="flex flex-row justify-start items-center gap-4">
+                <div className="flex flex-row justify-start items-center gap-2">
                     {isMobile && (
                         <button 
                             onClick={toggleSidebar}
@@ -31,11 +31,11 @@ const HeaderComponent = () => {
                         </button>
                     )}
                     <h1 style={{ fontFamily: "DM Sans" }} className="text-lg md:text-xl font-semibold subpixel-antialiased tracking-tight text-center text-white/80">
-                        {chatName?.slice(0, 20) + (chatName?.length && chatName?.length > 20 ? "..." : "") || "New Chat"}
+                        {chatName?.slice(0, 30) + (chatName?.length && chatName?.length > 30 ? "..." : "") || "New Chat"}
                     </h1>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
                     {/* OpenRouter Key Icon */}
                     <div className="relative">
                         <button
