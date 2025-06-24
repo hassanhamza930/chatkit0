@@ -68,30 +68,17 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
             {/* Main content */}
             <div
                 style={{ fontFamily: "Geist", resize: "none" }}
-                className="relative shadow-xl shadow-white/5 bg-white/5 rounded-2xl overflow-hidden p-4 border border-white/20 outline-none placeholder:text-white/50 text-white/90 flex flex-col gap-y-5">
+                className="relative shadow-xl shadow-white/5 bg-white/5 rounded-2xl overflow-hidden p-0 border border-white/20 outline-none placeholder:text-white/50 text-white/90 flex flex-col gap-y-5">
                 <textarea
                     placeholder="Ask me anything..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="w-full min-h-12 max-h-64 bg-transparent text-sm outline-none resize-none [field-sizing:content] scrollbar-hide font-normal tracking-normal break-all"
+                    className="p-4 w-full min-h-12 max-h-64 bg-transparent text-sm outline-none resize-none [field-sizing:content] scrollbar-hide font-normal tracking-normal break-all"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
-                {showSuggestions && suggestions.length > 0 && (
-                    <div className="bottom-full left-0 w-full bg-zinc-900 text-white border border-white/20 rounded-lg mb-2 p-2 z-10">
-                        {suggestions.map((suggestion, index) => (
-                            <div
-                                key={index}
-                                className="p-2 text-white/80 hover:bg-white/10 cursor-pointer rounded-md"
-                                onClick={() => handleSuggestionClick(suggestion.text)}
-                            >
-                                {suggestion.text}
-                            </div>
-                        ))}
-                    </div>
-                )}
 
-                <div className="flex flex-row justify-between items-center w-full">
+                <div className="p-4 flex flex-row justify-between items-center w-full">
 
                     <div className="flex-row flex justify-start items-center">
 
@@ -135,7 +122,24 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
 
 
                 </div>
+
+                {showSuggestions && suggestions.length > 0 && (
+                    <div className="bottom-full left-0 w-full bg-zinc-900 text-white border border-white/20 rounded-lg p-2 z-10">
+                        {suggestions.map((suggestion, index) => (
+                            <div
+                                key={index}
+                                className="p-2 text-white/80 text-xs font-xl hover:bg-white/10 cursor-pointer rounded-md"
+                                onClick={() => handleSuggestionClick(suggestion.text)}
+                            >
+                                {suggestion.text}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
+
+
+
 
         </motion.div>
     )
