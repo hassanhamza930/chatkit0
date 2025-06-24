@@ -19,7 +19,7 @@ const HeaderComponent = () => {
 
     return (
         <>
-            <header className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-3 md:px-3 py-4 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-3xl">
+            <header className="absolute top-0 right-0 z-50 w-full flex flex-row justify-between items-center px-3 md:px-6 py-4 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-3xl">
 
                 <div className="flex flex-row justify-start items-center gap-2">
                     {isMobile && (
