@@ -18,7 +18,7 @@ const MessagesAreaComponent = () => {
 
     return (
         <div
-            className="h-full flex flex-col justify-start items-center pb-[10%] pt-16 md:pt-24 gap-y-2 w-full overflow-y-auto overflow-x-hidden"
+            className="h-full flex flex-col justify-start items-center pb-[10%] pt-24 gap-y-2 w-full overflow-y-auto overflow-x-hidden"
             style={hideScrollbar as React.CSSProperties}
         >
             {
