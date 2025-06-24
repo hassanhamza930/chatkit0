@@ -14,12 +14,12 @@ const MessageComponent = ({ id, content, sender, timestamp, selectedModel }: Mes
 
                 <div className="flex flex-row justify-start items-center">
                     {/* <span style={{ fontFamily: "Special Gothic Expanded One" }} className="font-semibold text-sm opacity-80">{sender === 'user' ? 'You' : 'Assistant'}</span> */}
-                    <span className="text-[10px] font-normal opacity-60">
+                    <span className="text-[10px] md:text-xs font-normal opacity-60">
                         {new Intl.DateTimeFormat('en-US', { hour: '2-digit', day: '2-digit', month: 'short' }).format(timestamp)}
                     </span>
                 </div>
 
-                <div className="text-base leading-relaxed opacity-90 break-words overflow-x-hidden">
+                <div className="text-sm md:text-base leading-relaxed opacity-90 break-words overflow-x-hidden">
                     {isAssistantWithEmptyContent ? (
                     // {true ? (
                         <div className="animate-pulse mt-4">
@@ -29,18 +29,18 @@ const MessageComponent = ({ id, content, sender, timestamp, selectedModel }: Mes
                                     <div className="w-1 h-1 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                                     <div className="w-1 h-1 bg-white/60 rounded-full animate-bounce-slow" style={{ animationDelay: '0.2s' }}></div>
                                 </div>
-                                <span className="text-white/60 text-sm">Thinking</span>
+                                <span className="text-white/60 text-xs md:text-sm">Thinking</span>
                             </div>
                         </div>
                     ) : (
-                        <MarkdownRenderer content={content} className="prose prose-invert max-w-none prose-p:my-2 prose-headings:my-4 prose-ul:my-2 prose-ol:my-2 prose-li:my-1" />
+                        <MarkdownRenderer content={content} className="prose prose-invert max-w-none prose-sm md:prose-base" />
                     )}
                 </div>
 
                 <div className="flex justify-end opacity-80">
                     {
                         sender != "user" &&
-                        <span className="text-xs tracking-wide font-light px-3 py-1 rounded-full backdrop-blur-xl border border-white/40 flex flex-row justify-center items-center gap-x-1">
+                        <span className="text-[10px] md:text-xs tracking-wide font-light px-3 py-1 rounded-full backdrop-blur-xl border border-white/40 flex flex-row justify-center items-center gap-x-1">
                             <img src={selectedModel.logo} className="w-4 h-4 invert" />
                             {selectedModel.name}
                         </span>

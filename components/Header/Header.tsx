@@ -30,7 +30,7 @@ const HeaderComponent = () => {
                             <FaBars className="w-4 h-4" />
                         </button>
                     )}
-                    <h1 style={{ fontFamily: "DM Sans" }} className="text-xl font-semibold subpixel-antialiased tracking-tight text-center text-white/80">
+                    <h1 style={{ fontFamily: "DM Sans" }} className="text-lg md:text-xl font-semibold subpixel-antialiased tracking-tight text-center text-white/80">
                         {chatName?.slice(0, 20) + (chatName?.length && chatName?.length > 20 ? "..." : "") || "New Chat"}
                     </h1>
                 </div>
