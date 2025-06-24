@@ -25,3 +25,7 @@ export interface ChatInterface{
   messages: MessageInterface[];
   timeUpdated: Date;
 }
+
+export interface SuggestionInterface {
+  text: string;
+}

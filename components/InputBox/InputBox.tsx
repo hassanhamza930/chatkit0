@@ -4,10 +4,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaArrowsToCircle, FaBrain, FaExclamation, FaKey } from "react-icons/fa6";
 import { Command, Plus, CornerDownLeft } from "lucide-react";
-import { availableModels } from "@/app/const";
 import { useInputBoxStore } from "./store/inputboxstore";
 import { useChatStore } from "@/app/chat/store/store";
-import { memo, useCallback } from "react";
+import { memo, useCallback } from "react"; // Add useCallback back
+import { useSuggestionLogic } from "./hooks/useSuggestionLogic";
+import { availableModels } from "@/app/const"; // Import availableModels back
+import { ModelInterface } from "@/app/interfaces"; // Import ModelInterface back
 
 interface InputBoxProps {
     onSubmit: () => void;
@@ -17,6 +19,12 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
 
     const { searchQuery, setSearchQuery, selectedModel, setSelectedModel, openrouterKey } = useInputBoxStore();
     const { loadingResponse } = useChatStore();
+
+    const { suggestions, showSuggestions, handleSuggestionClick } = useSuggestionLogic({
+        searchQuery,
+        openrouterKey,
+        setSearchQuery,
+    });
 
     const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (loadingResponse) {
@@ -34,9 +42,8 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
 
     const handleModelChange = useCallback((value: string) => {
         const model = availableModels.find(m => m.value === value);
-        setSelectedModel(model!);
+        setSelectedModel(model as ModelInterface); // Cast to ModelInterface
     }, [setSelectedModel]);
-
 
     return (
         <motion.div
@@ -70,6 +77,19 @@ const InputBox = memo(({ onSubmit }: InputBoxProps) => {
                     className="w-full min-h-12 max-h-64 bg-transparent text-sm outline-none resize-none [field-sizing:content] scrollbar-hide font-normal tracking-normal break-all"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 />
+                {showSuggestions && suggestions.length > 0 && (
+                    <div className="bottom-full left-0 w-full bg-zinc-900 text-white border border-white/20 rounded-lg mb-2 p-2 z-10">
+                        {suggestions.map((suggestion, index) => (
+                            <div
+                                key={index}
+                                className="p-2 text-white/80 hover:bg-white/10 cursor-pointer rounded-md"
+                                onClick={() => handleSuggestionClick(suggestion.text)}
+                            >
+                                {suggestion.text}
+                            </div>
+                        ))}
+                    </div>
+                )}
 
                 <div className="flex flex-row justify-between items-center w-full">
 
