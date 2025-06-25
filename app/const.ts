@@ -11,7 +11,7 @@ export const availableModels = [
         name: "Gemini 2.5 Flash",
         value: "google/gemini-2.5-flash-preview-05-20",
         logo: "/gemini.png",
-        byok: false
+        byok: true
     },
     {
         name: "Gemini Flash 2.5 (Thinking)",
