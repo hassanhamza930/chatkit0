@@ -36,7 +36,7 @@ Make sure you have Node.js and npm (or yarn/pnpm) installed on your machine.
 
 1.  Clone the repo
     ```sh
-    git clone https://github.com/your_username/chatkit0.git
+    git clone https://github.com/hassanhamza930/chatkit0
     ```
 2.  Install NPM packages
     ```sh
